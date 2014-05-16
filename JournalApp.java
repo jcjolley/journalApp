@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.input.KeyEvent;
 
 //file stuff
 import java.io.File;
@@ -74,6 +75,16 @@ public class JournalApp extends Application {
         File file = fileChooser.showSaveDialog(stage);
         writeFile( textArea.getText(), file.getAbsolutePath(), false);
         myConsole.setText("Journal entry saved to " + file.getAbsolutePath());
+      }
+    });
+
+    //This watches the text area for changes in the text
+    textArea.setOnKeyReleased(new EventHandler<KeyEvent>() {
+      @Override
+      public void handle(KeyEvent event) {
+        myConsole.setText("A key was pressed");
+        //This will be where I send info to the markdown interpreter
+        //for displaying
       }
     });
 
