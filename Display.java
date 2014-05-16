@@ -17,12 +17,12 @@ import javafx.stage.Stage;
 
 
 /***
-* class MarkdownInterpreter
+* class Display
 * This class will interpret markdown into HTML for displaying.
 * JFrame elements are purely for debug at this point.  The
 * Final result will just feed the HTML to a different window for display
 */
-public class MarkdownInterpreter extends Application {
+public class Display extends Application {
   private Scene scene;
 
   /**
@@ -32,7 +32,7 @@ public class MarkdownInterpreter extends Application {
   @Override
   public void start(Stage stage) {
     //Set the title of the window
-    stage.setTitle("MarkdownInterpreter v0.02");
+    stage.setTitle("Display");
 
     //Create a new scene of type Browser (which we create below)
     //and with the background color specified
