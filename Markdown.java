@@ -2,6 +2,9 @@ import java.util.regex.*;
 
 public class Markdown {
 
+  /**
+  * @return Header level (eg: 1) if no header it will be 0
+  */
   public static int parseHeader(String line) {
     int i = 0;
     while (line.charAt(i) == '#') {
@@ -10,7 +13,6 @@ public class Markdown {
 
     return i;
   }
-
 
 
   /**
