@@ -1,5 +1,6 @@
 import java.util.regex.*;
 import java.lang.Character;
+import java.lang.StringBuffer;
 /**
 * @singleton Class that parses markdown
 */
@@ -32,24 +33,40 @@ public class Markdown {
     char cursor;
     int lastEm = -1;
     int lastStrong = -1;
+    StringBuffer text = new StringBuffer(allText);
 
-    for (int i = 0; i < allText.length(); i++) {
-      cursor = allText.charAt(i);
+    for (int i = 0; i < text.length(); i++) {
+      cursor = text.charAt(i);
+
       switch (cursor) {
       case '_':
         //checks if previous was whitespace
-        if (i - 1 < 0 || Character.isWhitespace(allText.charAt(i - 1))) {
-          if (allText.charAt(i + 1) == '_') {
-            if (lastStrong != -1) {
-
+        // is there two? (strong)
+        if (text.charAt(i + 1) == '_') {
+          // is this the left one?
+          if (lastStrong == -1) {
+            if (i - 1 < 0 || Character.isWhitespace(text.charAt(i - 1))) {
+              lastStrong = i;
+              // increment to get past double "__"
+              i++;
+            }
+          } else {
+            i++;
+            if (i + 1 > text.length() || Character.isWhitespace(text.charAt(i + 1))) {
+              text = text.delete(lastStrong, lastStrong + 2);
+              text = text.insert(lastStrong, "<strong>");
+              i += "<strong>".length() - 2;
+              text = text.delete(i-1, i+1);
+              text = text.insert(i-1, "</strong>");
+              i += "</strong>".length();
             }
           }
-
         }
+
       }
     }
 
-    return allText;
+    return text.toString();
   }
 
 
@@ -86,6 +103,7 @@ public class Markdown {
       result += line += "\n";
     }
 
+    result = parseChars(result);
 
     return result;
   }
@@ -96,8 +114,11 @@ public class Markdown {
     System.out.println(tagWrap(wrapMe, "div"));
     System.out.println(tagWrap(wrapMe, "a href=\"#awesome\""));
 
-    String parseMe = "#this is a H1 tag\nthis is a body\n##double h2!\nanother line.";
+    String parseMe = "#this is a H1 tag\nthis is a __body that has cool things\non multiple__ lines\n##double h2!\nanother line.";
     System.out.println(Parse(parseMe));
+    System.out.println(Parse("this_is_underscores not __bold__"));
+    System.out.println(Parse("__double__ __boldness__")); // fails
+    System.out.println(Parse("__single__boldness__With____Toomuch_underscore__")); // fails
   }
 
   /**
