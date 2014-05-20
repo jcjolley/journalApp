@@ -103,9 +103,12 @@ public class JournalApp extends Application {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Journal Entry as HTML");
 
+        FileChooser.ExtensionFilter htmlFilter = new FileChooser.ExtensionFilter("html file (*.html)", "html");
+        fileChooser.getExtensionFilters().add(htmlFilter);
+
         //this brings up the actual save prompt object and returns where you pick
         File file = fileChooser.showSaveDialog(stage);
-        writeFile( textArea.getText(), file.getAbsolutePath(), false);
+        writeFile( "<!DOCTYPE html>" + browser.getText(), file.getAbsolutePath(), false);
         myConsole.setText("Journal entry saved to " + file.getAbsolutePath() + " as html.");
       }
     });
@@ -133,9 +136,9 @@ public class JournalApp extends Application {
     hbox.getChildren().add(saveBtn);
     hbox.getChildren().add(htmlBtn);
     root.getChildren().add(hbox);
-    
+
     root.getChildren().add(myConsole);
-    
+
     //make the textArea the one that moves around
     VBox.setVgrow(textArea, Priority.ALWAYS);
 
@@ -182,8 +185,8 @@ class Browser extends Region {
 
     String myHTML = "<div><h1>Start typing, your text will be interpreted here.</div>";    //load the web page
     //add my HTML it to the webEngine
-    interpret(myHTML); 
-    
+    interpret(myHTML);
+
     //add the web view to the scene ... how does getChildren work?
     getChildren().add(browser);
   }
@@ -235,7 +238,11 @@ class Browser extends Region {
   * into the browser's web engine.
   */
   public void interpret(String htmlText) {
-   webEngine.loadContent(htmlText, "text/html");
- 
+    webEngine.loadContent(htmlText, "text/html");
+
+  }
+
+  public String getText() {
+    return (String) webEngine.executeScript("document.documentElement.outerHTML");
   }
 }
