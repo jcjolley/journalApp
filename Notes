@@ -1,0 +1,3 @@
+Notes:  
+
+perhaps I could use the observable pattern and make my Journal text field observable and whenever it changes my markdown interpreter observe the change interpret the change, and send information back to update the Journal.
