@@ -15,3 +15,7 @@ Changes 5-19-2014:<br/>
 ---Setup save as HTML button to work<br/>
 
 ![Screenshot](https://raw.github.com/jolleyboy/journalApp/master/screenshot.png)
+
+#Gage's Markdown parser
+
+__5/20/2014__ I'm building a markdown parser for this note taking app. Today I got the double underscore syntax for __bold__ working.
