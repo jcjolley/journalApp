@@ -9,12 +9,10 @@ public class Markdown {
   * @return Header level (eg: 1) if no header it will be 0
   */
 
-  static Markdown singleton;
+  static Markdown singleton = new Markdown();
 
   private Markdown() {
-    if (singleton != null) {
-      singleton = new Markdown();
-    }
+    // just to stop us from making it
   }
 
   public static Markdown getInstance() {
@@ -106,6 +104,7 @@ public class Markdown {
    *
    */
   public static void main(String[] args) {
-    Markdown.getInstance().test();
+    Markdown md = Markdown.getInstance();
+    md.test();
   }
 }
