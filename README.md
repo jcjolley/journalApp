@@ -13,3 +13,5 @@ Changes 5-19-2014:<br/>
 ---Set display to interpret Journal's textArea on keypress<br/>
 ---Added some UI elements (a spacer, a new save as HTML button, right aligned buttons)<br/>
 ---Setup save as HTML button to work<br/>
+
+![Screenshot](https://raw.github.com/jolleyboy/journalApp/master/screenshot.png)
