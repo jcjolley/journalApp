@@ -1,0 +1,36 @@
+Changes 5-19-2014:
+---Moved display into JournalApp
+---Set display to interpret Journal's textArea on keypress
+---Added some UI elements (a spacer, a new save as HTML button, right aligned buttons)
+---Setup save as HTML button to work
+
+Changes 5-15-2014:
+--Added an event listener for key presses
+--Set console to notify on a key press
+
+Changes 5-14-2014::
+---Actually saves files
+---Added a simple layout (it stretches now!)
+---re-added console
+---now on GitHub
+---class name changed to JournalApp
+
+Changes 5-13-2014:
+--- Changed Journal app from swing to javafx
+--- Lost the console (it'll be back)
+--- Lost my layout (it'll be back)
+--- Changed MarkdownInterpreter from swing to javafx
+
+Changes 5-8-2014:
+---Fixed showOpenDialog to showSaveDialog (Yay save button!)
+---Created a new class: MarkdownInterpreter. It can:
+------Take an HTML string and display it.
+
+Changes 5-5-2014:
+---Can save files!
+
+Changes 5-3-2014:
+---Setup swing grouplayout
+
+Started 4-28-2014
+---Simple JFrame with text area and auto screen centering
