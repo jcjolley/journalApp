@@ -118,6 +118,10 @@ public class Markdown {
       int h = parseHeader(line);
       if (h > 0 && h <= 6) {
         line = tagWrap(line.substring(h), "h" + h);
+      } else {
+        // do this?
+        // line = tagWrap(line, "p");
+        line = line + "<br />";
       }
 
       result += line += "\n";
