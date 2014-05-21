@@ -43,7 +43,7 @@ public class JournalApp extends Application {
   private TextArea textArea;
   private TextField myConsole;
   private Browser browser;
-
+  private Markdown md;
   /**
   * method writeFile
   * A generic method to write to a file.
@@ -65,6 +65,7 @@ public class JournalApp extends Application {
   @Override
   public void start(Stage stage) {
     Region spacer = new Region();
+    md = Markdown.getInstance();
     Button saveBtn = new Button();
     Button htmlBtn = new Button();
     Label label = new Label("What's on your mind?");
@@ -116,8 +117,8 @@ public class JournalApp extends Application {
     textArea.setOnKeyReleased(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {
-        myConsole.setText("A key was pressed");
-        browser.interpret("<div>" + textArea.getText() + "</div>");
+        myConsole.setText("A key pressed: " + event.getCode().getName());
+        browser.interpret("<div>" + md.Parse(textArea.getText()) + "</div>");
         //This will be where I send info to the markdown interpreter
         //for displaying
       }
