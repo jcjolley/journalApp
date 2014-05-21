@@ -8,8 +8,8 @@ This app will take your journal entries entered in markdown format, and save the
 HTML files.  
 
 Most recent change:  
-Changes 5-20-2014:  
-- Commented out main in Markdown.java  
+**Changes 5-21-2014:**  
+- Commented out main in Markdown.java
 - Console now tells you what key you pressed (for debug)  
 - Testing Markdown.Parse() on keypress.  We've got bold text! .... sorta.  
 - praising the coding prowess of Sir. Gage of Programalot  
