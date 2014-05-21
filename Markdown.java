@@ -29,6 +29,27 @@ public class Markdown {
     return i;
   }
 
+  /**
+  * This will replace characters surrounding somthing with a HTML tag
+  * @arg oldChars - the characters that will surround some text
+  *      eg: "_" for "_italic_"
+  * @arg newTag - the tag name
+  *       like "div id='coolness'" for "<div id='coolness'>italic</div>"
+  * @arg leftOffset/rightOffset - where the character(s) to be replaced are in text.
+  *       eg: __bold is so cold__
+  *           ^-leftOffset     ^-rightOffset (note it points to the left most char in both)
+  * @arg text the body of text in which this all resides
+  * @return newly changed text
+  */
+  private StringBuffer replaceSurrounding(String oldChars, String newTag, int leftOffset,
+                                          int rightOffset, StringBuffer text) {
+    int oldWidth = oldChars.length();
+    String pulled = text.substring(leftOffset + oldWidth, rightOffset);
+    text = text.delete(leftOffset, rightOffset + oldWidth);
+    text = text.insert(leftOffset, tagWrap(pulled, newTag));
+    return text;
+  }
+
   public String parseChars(String allText) {
     char cursor;
     int lastEm = -1;
@@ -51,14 +72,12 @@ public class Markdown {
               i++;
             }
           } else {
-            i++;
-            if (i + 1 > text.length() || Character.isWhitespace(text.charAt(i + 1))) {
-              text = text.delete(lastStrong, lastStrong + 2);
-              text = text.insert(lastStrong, "<strong>");
-              i += "<strong>".length() - 2;
-              text = text.delete(i-1, i+1);
-              text = text.insert(i-1, "</strong>");
-              i += "</strong>".length();
+            // i is on the left "_" of the closing "__"
+            if (i + 2 > text.length() || Character.isWhitespace(text.charAt(i + 2))) {
+
+              text = replaceSurrounding("__", "strong", lastStrong, i, text);
+              
+              lastStrong = -1;
             }
           }
         }
