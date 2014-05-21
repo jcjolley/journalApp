@@ -11,8 +11,8 @@ Most recent change:
 **Changes 5-21-2014:**  
 - Commented out main in Markdown.java
 - Console now tells you what key you pressed (for debug)  
-- Testing Markdown.Parse() on keypress.  We've got bold text! .... sorta.  
-- praising the coding prowess of Sir. Gage of Programalot  
+- Testing Markdown.Parse() on keypress.  We've got bold text and headers!
+- praising the coding prowess of Sir. Gage of Programalot.
 
 ![Screenshot](https://raw.github.com/jolleyboy/journalApp/master/screenshot.png)
 
