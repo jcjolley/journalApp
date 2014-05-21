@@ -1,3 +1,9 @@
+Changes 5-20-2014:
+---Commented out main in Markdown.java
+---Console now tells you what key you pressed (for debug)
+---Testing Markdown.Parse() on keypress. We've got bold text! .... sorta.
+---Praising the coding prowess of Sir. Gage of Programalot
+
 Changes 5-19-2014:
 ---Moved display into JournalApp
 ---Set display to interpret Journal's textArea on keypress
