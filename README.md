@@ -8,11 +8,11 @@ This app will take your journal entries entered in markdown format, and save the
 HTML files.  
 
 Most recent change:<br/>
-Changes 5-19-2014:<br/>
----Moved display into JournalApp<br/>
----Set display to interpret Journal's textArea on keypress<br/>
----Added some UI elements (a spacer, a new save as HTML button, right aligned buttons)<br/>
----Setup save as HTML button to work<br/>
+Changes 5-20-2014:<br/>
+---Commented out main in Markdown.java<br/>
+---Console now tells you what key you pressed (for debug)<br/>
+---Testing Markdown.Parse() on keypress.  We've got bold text! .... sorta.<br/>
+---Praising the coding prowess of Sir. Gage of Programalot<br/>
 
 ![Screenshot](https://raw.github.com/jolleyboy/journalApp/master/screenshot.png)
 
