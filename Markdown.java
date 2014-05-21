@@ -22,7 +22,8 @@ public class Markdown {
 
   public int parseHeader(String line) {
     int i = 0;
-    while (line.charAt(i) == '#') {
+
+    while (i < line.length() && line.charAt(i) == '#') {
       i++;
     }
 
@@ -76,7 +77,7 @@ public class Markdown {
             if (i + 2 > text.length() || Character.isWhitespace(text.charAt(i + 2))) {
 
               text = replaceSurrounding("__", "strong", lastStrong, i, text);
-              
+
               lastStrong = -1;
             }
           }
@@ -133,7 +134,7 @@ public class Markdown {
     System.out.println(tagWrap(wrapMe, "div"));
     System.out.println(tagWrap(wrapMe, "a href=\"#awesome\""));
 
-    String parseMe = "#this is a H1 tag\nthis is a __body that has cool things\non multiple__ lines\n##double h2!\nanother line.";
+    String parseMe = "#this is a __H1__ tag\nthis is a __body that has cool things\non multiple__ lines\n##double h2!\nanother line.";
     System.out.println(Parse(parseMe));
     System.out.println(Parse("this_is_underscores not __bold__"));
     System.out.println(Parse("__double__ __boldness__")); // fails
