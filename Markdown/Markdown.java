@@ -1,3 +1,4 @@
+import java.util.regex.*;
 import java.lang.Character;
 import java.lang.StringBuffer;
 /**
@@ -29,7 +30,27 @@ public class Markdown {
     return i;
   }
 
- 
+  /**
+  * This will replace characters surrounding somthing with a HTML tag
+  * @arg oldChars - the characters that will surround some text
+  *      eg: "_" for "_italic_"
+  * @arg newTag - the tag name
+  *       like "div id='coolness'" for "<div id='coolness'>italic</div>"
+  * @arg leftOffset/rightOffset - where the character(s) to be replaced are in text.
+  *       eg: __bold is so cold__
+  *           ^-leftOffset     ^-rightOffset (note it points to the left most char in both)
+  * @arg text the body of text in which this all resides
+  * @return newly changed text
+  */
+  private StringBuffer replaceSurrounding(String oldChars, String newTag, int leftOffset,
+                                          int rightOffset, StringBuffer text) {
+    int oldWidth = oldChars.length();
+    String pulled = text.substring(leftOffset + oldWidth, rightOffset);
+    text = text.delete(leftOffset, rightOffset + oldWidth);
+    text = text.insert(leftOffset, tagWrap(pulled, newTag));
+    return text;
+  }
+
   public String parseChars(String allText) {
     char cursor;
     int lastEm = -1;
@@ -69,7 +90,15 @@ public class Markdown {
   }
 
 
-
+  /**
+   * This function will easily wrap any string in a tag.
+   *    toWrap - text to be wrapped in a tag. "wrapped"
+   *    tag - tag text "div id="content""
+   * @return wrapped text (eg: <div id="conent">wrapped</div>)
+   */
+  public String tagWrap(String toWrap, String tag) {
+    return "<" + tag + ">" + toWrap + "</" + tag.split(" ")[0] + ">";
+  }
 
   /**
    * Will run the parser, line per line
@@ -124,4 +153,3 @@ public class Markdown {
     md.test();
   }
 }
-
