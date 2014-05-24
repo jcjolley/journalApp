@@ -12,8 +12,8 @@ class Rememberer {
   */
   public Rememberer(String tokens, String newTag) {
 
-    if (tokens.matches("|")) {
-      String[] tempTokens = tokens.split("|");
+    if (tokens.matches(" OR ")) {
+      String[] tempTokens = tokens.split(" OR ");
       leftToken = tempTokens[0];
       rightToken = tempTokens[1];
     } else {
@@ -51,11 +51,11 @@ class Rememberer {
 
   	String oldChars = text.substring(curOffset, curOffset + leftToken.length());
 
-    if (leftOffset == -1 && oldChars.equals(leftToken)) {
+    if (leftOffset == -1 && oldChars.matches(leftToken)) {
       leftOffset = curOffset;
     }
 
-    if (leftOffset != -1 && oldChars.equals(rightToken)) {
+    if (leftOffset != -1 && oldChars.matches(rightToken)) {
       int oldWidth = oldChars.length();
       String pulled = text.substring(leftOffset + oldWidth, curOffset);
       text = text.delete(leftOffset, curOffset + oldWidth);
