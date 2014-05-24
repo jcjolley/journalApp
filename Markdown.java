@@ -53,37 +53,14 @@ public class Markdown {
 
   public String parseChars(String allText) {
     char cursor;
-    int lastEm = -1;
-    int lastStrong = -1;
     StringBuffer text = new StringBuffer(allText);
 
+    Rememberer list[] = {
+      new Rememberer("\\*\\* OR \\*\\*", "strong")
+    };
+
     for (int i = 0; i < text.length(); i++) {
-      cursor = text.charAt(i);
-
-      switch (cursor) {
-      case '_':
-        //checks if previous was whitespace
-        // is there two? (strong)
-        if (text.charAt(i + 1) == '_') {
-          // is this the left one?
-          if (lastStrong == -1) {
-            if (i - 1 < 0 || Character.isWhitespace(text.charAt(i - 1))) {
-              lastStrong = i;
-              // increment to get past double "__"
-              i++;
-            }
-          } else {
-            // i is on the left "_" of the closing "__"
-            if (i + 2 > text.length() || Character.isWhitespace(text.charAt(i + 2))) {
-
-              text = replaceSurrounding("__", "strong", lastStrong, i, text);
-
-              lastStrong = -1;
-            }
-          }
-        }
-
-      }
+      
     }
 
     return text.toString();

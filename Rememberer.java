@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 class Rememberer {
   private String leftToken;
   private String rightToken;
@@ -8,11 +10,11 @@ class Rememberer {
   /**
   * Create's a rememberer
   * @arg tokens - the left and right tokens if they are the same then just "_"
-  * 			  if they are different sperate with a | like so "{|}"
+  *         if they are different sperate with a | like so "{|}"
   */
   public Rememberer(String tokens, String newTag) {
 
-    if (tokens.matches(" OR ")) {
+    if (tokens.indexOf(" OR ") > -1) {
       String[] tempTokens = tokens.split(" OR ");
       leftToken = tempTokens[0];
       rightToken = tempTokens[1];
@@ -49,7 +51,7 @@ class Rememberer {
   */
   private void maybeReplace(int curOffset, StringBuffer text) {
 
-  	String oldChars = text.substring(curOffset, curOffset + leftToken.length());
+    String oldChars = text.substring(curOffset, curOffset+5);
 
     if (leftOffset == -1 && oldChars.matches(leftToken)) {
       leftOffset = curOffset;
@@ -61,5 +63,32 @@ class Rememberer {
       text = text.delete(leftOffset, curOffset + oldWidth);
       text = text.insert(leftOffset, tagWrap(pulled, tag));
     }
+  }
+
+  public void test() {
+    System.out.println("leftToken:" + leftToken);
+    System.out.println("rightToken:" + rightToken);
+    //test of tag wrapper
+    System.out.println(tagWrap("this is a sentance", "p"));
+    System.out.println(tagWrap("this is a sentance", "div tag='coolness'"));
+    String match = "$__\\w*";
+    System.out.println(Pattern.matches(match, " __asdf"));
+    System.out.println(Pattern.matches(match, "__asdf"));
+    System.out.println(Pattern.matches(match, "__ asdf"));
+
+    // test of matching
+    StringBuffer boldMe = new StringBuffer(" __THIS IS COOL__ **this is cool too**");
+
+    maybeReplace(0, boldMe);
+    System.out.println("left:" + leftOffset);
+    maybeReplace(13, boldMe);
+    System.out.println("left:" + leftOffset);
+    System.out.println(boldMe);
+
+  }
+
+  public static void main(String[] args) {
+    Rememberer tester = new Rememberer(".*\\W__ OR __\\s.*", "strong");
+    tester.test();
   }
 }
