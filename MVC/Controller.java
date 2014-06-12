@@ -1,4 +1,4 @@
-import java.util.BufferedReader;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
@@ -13,13 +13,16 @@ public class Controller implements Runnable {
 
   public String getFilename() {
     System.out.println("What file would you like to display?");
-    String filename = ""
-    try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+    String filename = "";
+
+    try(BufferedReader br = new BufferedReader(
+        new InputStreamReader(System.in))) {
       filename = br.readLine();
     } catch (IOException e) {
       e.getMessage();
       e.printStackTrace();
     }
+    
     return filename;
   }
 

@@ -1,29 +1,29 @@
-import java.util.BufferedReader;
-import java.util.FileReader;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Model {
 
-  private static Markdown singleton = new Markdown();
+  private static Model singleton = new Model();
 
   private Model() {
     //to prevent making seperate instances
   }
 
   public String readFile(String filename) {
-    try (Buffered Reader br = new BufferedReader(new FileReader(filename))) {
-      String data = "";
+    String data = "";
+    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
       int i = 1;
-      
-      while ((data += br.readLine()) != null) {
-        System.out.println("Read line " + i;)
-        i++;
+      String line = "";
+      while ((line = br.readLine()) != null) {
+        data += line + "\n";
       }
     } catch (IOException e) {
       e.getMessage();
       e.printStackTrace();
     }
-  } 
+    return data;
+  }
 
   public static Model getInstance() {
     return singleton;

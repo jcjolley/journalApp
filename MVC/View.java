@@ -2,7 +2,7 @@
 
 public class View {
 
-  private static Markdown singleton = new Markdown();
+  private static View singleton = new View();
 
   private View() {
     //to prevent making seperate instances
@@ -13,12 +13,16 @@ public class View {
   }
 
   public void display(String data){
-    String[] lines = string.split(System.getProperty("line.seprator"));
-    System.out.println("*********************************************");
-    for (line : lines) {
-      System.out.println("**   " + line + "   **");
+    String[] lines = data.split("\n");
+    System.out.println("********************************************************************************");
+    System.out.println("********************************************************************************");
+    
+    for (String line : lines) {
+      System.out.println(String.format("**   %-70s   **", line));
     }
-    System.out.println("*********************************************");
+    System.out.println("********************************************************************************");
+    System.out.println("********************************************************************************");
+    
   }
 
 }
